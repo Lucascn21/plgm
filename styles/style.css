@@ -1,115 +1,316 @@
-body {
-    --text-color: #222;
-    --bkg-color: #fff;
-}
-
+/*
 body.dark-theme {
-    --text-color: #eee;
-    --bkg-color: #121212;
+	--text-color: #eee;
+	--bkg-color: #212529;
 }
-
-@media (prefers-color-scheme: dark) {
-    /* defaults to dark theme */
-    body {
-        --text-color: #eee;
-        --bkg-color: #121212;
-    }
-    body.light-theme {
-        --text-color: #222;
-        --bkg-color: #fff;
-    }
-}
-
+*/
 * {
-    font-family: Heebo, sans-serif;
-    /*font-family: Arial, Helvetica, sans-serif;*/
+	font-family: Heebo, sans-serif;
+	/*font-family: Arial, Helvetica, sans-serif;*/
 }
-
 body {
-    background: var(--bkg-color);
+	background: #121314;
+	color: white;
+}
+/*Link reset*/
+a:link,
+a:hover {
+	color: #eee;
+	text-decoration: none;
 }
 
-h1,
-p {
-    color: var(--text-color);
+a:visited,
+a:hover {
+	color: #eee;
+	text-decoration: none;
 }
 
+a:hover,
+a:hover {
+	text-decoration: none;
+}
+
+/*Background*/
+.bg {
+	z-index: -1;
+	background-image: url("/img/fondos/16245680689844.png");
+	background-position: right bottom, left top;
+	background-repeat: no-repeat, repeat;
+}
+
+/*Landing*/
 #landing {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 
+#descriptionLanding {
+	font-size: 1rem;
+}
+
+#landingAsideText {
+	color: rgb(16, 189, 16) !important;
+}
+
+/*Cards*/
 #card {
-    background-color: rgba(255, 255, 255, 0.1);
-    text-decoration: none;
-    border: 1px solid #212529;
-    background: #242424;
-    font-size: 1.3em;
-    font-weight: 400;
-    line-height: 1.5;
+	background-color: rgba(255, 255, 255, 0.1);
+	text-decoration: none;
+	border: 1px solid #212529;
+	background: #242424;
+	font-size: 1.3em;
+	font-weight: 400;
+	line-height: 1.5;
+	border: 0.1rem solid #3f3d7a;
 }
 
 #card:hover {
-    background-color: #FFAC00;
-    color: rgb(0, 0, 0) !important;
-    border: 1px solid #FFAC00;
-}
-
-a:link {
-    color: red;
-    text-decoration: none;
-}
-
-a:visited {
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: none;
+	background-color: #be8b1c;
+	color: rgb(0, 0, 0) !important;
+	border: 1px solid #615644;
 }
 
 #card .desc h3 {
-    line-height: 1.3;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    position: relative;
-    color: #E5E5E5;
+	line-height: 1.3;
+	font-size: 13px;
+	font-weight: 500;
+	letter-spacing: 3px;
+	text-transform: uppercase;
+	position: relative;
+	color: #e5e5e5;
 }
 
 #card .desc h3:after {
-    position: absolute;
-    bottom: -15px;
-    left: 0;
-    right: 0;
-    width: 30px;
-    height: 1px;
-    background: #FFAC00;
-    margin: 0 auto;
+	position: absolute;
+	bottom: -15px;
+	left: 0;
+	right: 0;
+	width: 30px;
+	height: 1px;
+	background: #ffac00;
+	margin: 0 auto;
 }
 
 #card .desc p strong {
-    color: #6ec5b8;
+	color: #3f3d7a;
 }
 
 #card:hover p {
-    color: black;
+	color: black;
 }
 
+/*Skills*/
 #skills button {
-    text-align: center;
-    border-radius: 8px;
-    background-color: rgb(37, 37, 48);
-    padding: 4px 10px;
-    margin: 4px;
-    cursor: pointer;
+	text-align: center;
+	border-radius: 8px;
+	background-color: rgb(37, 37, 48);
+	padding: 4px 10px;
+	margin: 4px;
+	cursor: pointer;
 }
 
 #skills h3 {
-    color: rgb(226, 226, 226);
-    font-weight: 200;
-    margin: 0;
+	color: rgb(226, 226, 226);
+	font-weight: 200;
+	margin: 0;
+}
+/*Offcanvas popup*/
+.offcanvas {
+	background-color: #131318;
+}
+
+.offcanvas-title {
+	color: rgb(226, 226, 226);
+}
+
+/* Sidebars */
+#sideBarLeft {
+	position: fixed;
+	width: 80px;
+	height: 100vh;
+	left: 0px;
+	top: 0px;
+	display: flex;
+	flex-direction: column;
+	-webkit-box-align: center;
+	align-items: center;
+	-webkit-box-pack: end;
+	justify-content: flex-end;
+	padding-bottom: 2.5rem;
+}
+
+.sidebarElementLeft {
+	width: 40px;
+	height: 40px;
+	margin-bottom: 15px;
+	border-radius: 25px;
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+	-webkit-box-pack: center;
+	justify-content: center;
+	cursor: pointer;
+}
+
+#sidebarRight {
+	position: fixed;
+	width: 80px;
+	height: 100vh;
+	right: 0px;
+	top: 0px;
+	display: flex;
+	flex-direction: column;
+	-webkit-box-align: center;
+	align-items: center;
+	-webkit-box-pack: start;
+	justify-content: flex-start;
+}
+@media screen and (max-width: 1024px) {
+	#sidebarRight {
+		position: fixed;
+		width: 100%;
+		height: 10vh;
+		align-items: center;
+		align-content: center;
+		display: flex;
+		flex-direction: row;
+		align-items: flex-start;
+		-webkit-box-align: center;
+		-webkit-box-pack: start;
+		justify-content: space-around;
+		background-color: rgb(59, 59, 59);
+		opacity: 1;
+	}
+	#sidebarRight section {
+		padding-top: 5%;
+		margin: #121314 solid 1px;
+	}
+	#sideBarLeft {
+		position: relative;
+		width: 100%;
+		height: 1vh;
+		padding: 0px;
+		display: flex;
+		flex-direction: row;
+		align-items: flex-end;
+		-webkit-box-align: center;
+		-webkit-box-pack: start;
+		justify-content: space-around;
+	}
+	#sidebarLineRight {
+		display: none;
+	}
+}
+
+@media only screen and (max-width: 900px) {
+	#sidebarRight {
+		height: 10vh;
+	}
+}
+
+#sidebarLineRight {
+	height: 100px;
+	width: 2px;
+	background: rgb(30, 30, 49);
+}
+.sidebarElementRight {
+	font-weight: 400;
+}
+
+/* Occupy the full viewport height*/
+#projects,
+#about {
+	min-height: 100vh;
+}
+
+/* Buttons hover and focus in the skills section */
+.highlightGreen {
+	color: green;
+	border-color: green;
+}
+
+.btn-check:focus + .btn-dark,
+.btn-dark:focus {
+}
+
+.btn-dark:hover {
+	color: rgb(102, 153, 7);
+}
+
+/* Subheadings in the about section*/
+h2 strong {
+	display: block;
+	font-size: 75%;
+	opacity: 0.75;
+}
+
+footer {
+	background-color: rgb(18, 19, 20, 0.5);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 5vh;
+}
+
+/* SVG Icons in the about section*/
+.svg-icon {
+	width: 4rem;
+	height: 4rem;
+}
+
+.svg-icon path,
+.svg-icon polygon,
+.svg-icon rect {
+	fill: #4691f6;
+}
+
+.svg-icon circle {
+	stroke: #4691f6;
+	stroke-width: 1;
+}
+
+.svg-icon:hover {
+	stroke: #ffac00;
+	stroke-width: 1;
+}
+
+.highlightCurrent {
+	color: #ffac00;
+}
+
+#toast {
+	position: fixed;
+	right: 0px;
+	bottom: 0px;
+}
+
+.btn-check:focus + .btn-dark,
+.btn-dark:focus {
+	box-shadow: 0 0 0 0.25rem rgba(66, 70, 73, 0.1) !important;
+}
+
+.btn-link:hover {
+	opacity: 1;
+	text-decoration: none;
+}
+.btn-link:active {
+	text-decoration: none;
+}
+.btn-link:focus {
+	text-decoration: none;
+}
+.btn-link:visited {
+	text-decoration: none !important;
+}
+
+.btn-outline-success {
+	color: #198754 !important;
+	border-color: #198754 !important;
+}
+
+.btn-outline-warning {
+	color: rgb(255, 193, 7) !important;
+	border-color: rgb(255, 193, 7) !important;
 }
