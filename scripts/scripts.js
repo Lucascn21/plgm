@@ -77,7 +77,7 @@ function addIcons(courseButton) {
 //Function that returns the icon's html
 function generateIcons(tech) {
 	let techStack = "";
-	//Case-specific hack, i would have to implement some big changes to my site in order to avoid this, i will definetly do a better architecture next time.
+	//Case-specific hack, i would have to implement some big architectural changes to my site in order to avoid this, i will definetly do a better architecture next time.
 	if (tech[0] === "C C++ C#") tech = ["C", "Cplusplus", "Csharp"];
 	Object.entries(tech).forEach((tech) => {
 		const [key, value] = tech;
@@ -167,71 +167,3 @@ function toggleIcon(section) {
 		section.childNodes[1].outerHTML = svgIconMinus;
 	}
 }
-
-//Sidebar Nav highlighting
-let sectionsOffsets = {};
-
-//Sidebar elements
-let sidebarElementsRight = Array.from(document.getElementsByClassName("sidebarElementRight"));
-
-//Storing section's offsets in its array
-let landing = document.getElementById("landing");
-sectionsOffsets["landing"] = landing.offsetTop;
-
-let sections = document.querySelectorAll("section");
-sections.forEach((value, key, parent) => {
-	if (value.id) {
-		sectionsOffsets[value.id] = value.offsetTop;
-	}
-});
-
-//Bootstrap Toast
-let toastElList = [].slice.call(document.querySelectorAll(".toast"));
-
-let toastList = toastElList.map(function (toastEl) {
-	let option = {
-		animation: true,
-		autohide: true,
-		delay: 50000,
-	};
-	return new bootstrap.Toast(toastEl, option);
-});
-
-let toastMsgs = {
-	landing: `<p class="text-dark">Welcome to my site. </p>`,
-	projects: `<p class="text-dark">These are the projects i've selected for you to view</p>`,
-	skills: `<p class="text-dark">These are my skills, projects and courses.<br> The skills icons are clickable and will highlight their corresponding course and or project.<br> <span class="text-warning">Yellow meaning SOME of the selected skills were learned/applied in the highlighted course or project.</span><br> <span class="text-success">Green means that a full stack of the selected skills was learned or applied in the highlighted course or project.</span><br><br> Hovering the mouse over a course or project will highlight its corresponding skills in green.<br> Clicking a course or project will show a detailed view.</p>`,
-	about: `<p class="text-dark">The about me section has a TLDR version and a long version of who i am.<br> The project's about section is an overall overview of this project and its development</p>`,
-};
-
-let toastText = document.getElementById("toastText");
-const showToast = (currentSection) => {
-	if (toastText.innerHTML != toastMsgs[currentSection]) {
-		toastText.innerHTML = toastMsgs[currentSection];
-		toastList[0].show();
-	}
-};
-
-//Find the current-on-view section
-window.addEventListener("scroll", () => {
-	findMatchingSection(Object.entries(sectionsOffsets), scrollY);
-});
-
-//return the closest Y offset in my array that matches the current scrollY position
-const findMatchingSection = (sectionsOffsets, currentSection) => {
-	sectionsOffsets.reduce((a, b) => {
-		matchingSection = Math.abs(b[1] - currentSection) < Math.abs(a[1] - currentSection) ? b : a;
-		return matchingSection;
-	});
-
-	//If the current section matches or not an element on the right, add or remove highlight
-	sidebarElementsRight.forEach((rightSidebarElement) => {
-		if (rightSidebarElement.innerText.toLowerCase() === matchingSection[0]) {
-			rightSidebarElement.classList.add("highlightCurrent");
-		} else {
-			rightSidebarElement.classList.remove("highlightCurrent");
-		}
-	});
-	//Show the section's corresponding Toast
-	showToast(matchingSection[0]);
-};

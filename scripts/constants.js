@@ -80,4 +80,11 @@ const PROJECTS = {
 	},
 };
 
-export { COURSES, PROJECTS };
+const TOASTMSGS = {
+	landing: `<p class="text-dark">Welcome to my site. </p>`,
+	projects: `<p class="text-dark">These are the projects i've selected for you to view</p>`,
+	skills: `<p class="text-dark">These are my skills, projects and courses.<br> The skills icons are clickable and will highlight their corresponding course and or project.<br> <span class="text-warning">Yellow meaning SOME of the selected skills were learned/applied in the highlighted course or project.</span><br> <span class="text-success">Green means that a full stack of the selected skills was learned or applied in the highlighted course or project.</span><br><br> Hovering the mouse over a course or project will highlight its corresponding skills in green.<br> Clicking a course or project will show a detailed view.</p>`,
+	about: `<p class="text-dark">The about me section has a TLDR version and a long version of who i am.<br> The project's about section is an overall overview of this project and its development</p>`,
+};
+
+export { COURSES, PROJECTS, TOASTMSGS };
