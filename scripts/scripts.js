@@ -115,10 +115,10 @@ function calculate_age(dob) {
 landingAgeText.textContent = calculate_age(new Date(1992, 2, 8));
 
 //Highlight / Dehighlight stuff
-function highlightTechs(botonPickeado) {
+function highlightTechs(selectedTech) {
 	//Highlight the tech related to the course or project
 	let totalTech = [];
-	let courseTech = botonPickeado.attributes["data-tech"].textContent.toLowerCase().split(",");
+	let courseTech = selectedTech.attributes["data-tech"].textContent.toLowerCase().split(",");
 	document
 		.getElementById("tech")
 		.querySelectorAll(".btn")
@@ -126,20 +126,20 @@ function highlightTechs(botonPickeado) {
 			Button.classList.remove("btn-outline-success");
 			if (courseTech.indexOf(Button.textContent.toLowerCase()) != -1) {
 				Button.classList.add("highlightGreen");
-				botonPickeado.classList.add("btn-lg");
+				selectedTech.classList.add("btn-lg");
 			}
 			totalTech.push(Button.textContent.toLowerCase());
 		});
 }
 
-function deHighlightTechs(botonPickeado) {
+function deHighlightTechs(selectedTech) {
 	document
 		.getElementById("courses&projects")
 		.querySelectorAll(".btn")
 		.forEach(function (CoursesProjectsButton) {
 			if (CoursesProjectsButton.textContent == CoursesProjectsButton.textContent) {
 				CoursesProjectsButton.classList.remove("highlightGreen");
-				botonPickeado.classList.remove("highlightGreen", "btn-lg");
+				selectedTech.classList.remove("highlightGreen", "btn-lg");
 			}
 		});
 	document
