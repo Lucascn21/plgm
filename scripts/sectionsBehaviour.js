@@ -47,16 +47,14 @@ let toastElList = [].slice.call(document.querySelectorAll(".toast"));
 let toastList = toastElList.map(function (toastEl) {
 	let option = {
 		animation: true,
-		autohide: true,
-		delay: 50000,
 	};
 	return new bootstrap.Toast(toastEl, option);
 });
 
 let toastText = document.getElementById("toastText");
-
+let isToastHidden = document.getElementById("toastText").classList[1] == "hidden" ? true : false;
 const showToast = (currentSection) => {
-	if (toastText.innerHTML != TOASTMSGS[currentSection]) {
+	if (toastText.innerHTML != TOASTMSGS[currentSection] && !isToastHidden) {
 		toastText.innerHTML = TOASTMSGS[currentSection];
 		toastList[0].show();
 	}

@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="redist/bootstrap.min.css">
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" type="text/css" href="redist/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
@@ -33,6 +33,7 @@
                         <p id='descriptionLanding'>My name is Lucas, i am a <span id="landingAsideText" class="text-muted lead" style="font-size: 1rem"></span> from Argentina.<br>
                             According to some function in scripts.js, i am <span id="landingAgeText"></span> years old. <br>
                             I am currently diving into Coding. <br> I have also dabbled in Game Development and Human Resources. <br>
+                            My goal and focus is becoming a Javascript Developer.
                         </p>
                     </div>
                 </div>
@@ -182,7 +183,7 @@
             
             </section>
 
-            <section id="about" class="row h-100">
+            <section id="about" class="row">
                 <div class="container py-4">
                     <header class="pb-3 mb-4 border-bottom text-center">
                         <h1 class="fs-4">About</h1>
@@ -265,9 +266,11 @@
         <div class="toast-header">
           <img src="/img/iconos/github.png" class="rounded me-2" alt="...">
           <strong class="me-auto">Lucas</strong>
-          <button type="button" class="btn-close" data-bs-dismiss="toast"  aria-label="Close"></button>
+          <button type="button" class="boton" data-bs-minimize="toast" aria-label="Minimize" onclick="hideToastBody(this)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="bevel"><path d="M6 9l6 6 6-6"/></svg></button>
+          <button type="button" class="boton" data-bs-dismiss="toast"  aria-label="Close" onclick="hideToast()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="bevel"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+  
         </div>
-        <div id="toastText"toastText class="toast-body"></div>
+        <div id="toastText" class="toast-body"></div>
       </div>
     <footer class="text-light border-top border-secondary">
         Lucas Goldental © 2021
