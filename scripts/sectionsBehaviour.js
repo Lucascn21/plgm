@@ -47,6 +47,7 @@ let toastElList = [].slice.call(document.querySelectorAll(".toast"));
 let toastList = toastElList.map(function (toastEl) {
 	let option = {
 		animation: true,
+		autohide: false,
 	};
 	return new bootstrap.Toast(toastEl, option);
 });

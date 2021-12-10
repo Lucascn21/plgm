@@ -45,7 +45,9 @@ a:hover {
 }
 
 #landingAsideText {
-	color: rgb(16, 189, 16) !important;
+	/*color: rgb(16, 189, 16) !important;*/
+
+	color: #4691f6 !important;
 }
 
 /*Landing Iframe*/
@@ -70,11 +72,11 @@ iframe {
 	font-size: 1.3em;
 	font-weight: 400;
 	line-height: 1.5;
-	border: 0.1rem solid #2b0f91;
+	border: 0.1rem solid #181557; /*#2b0f91*/
 }
 
 #card:hover {
-	background-color: #615644;
+	background-color: rgb(55, 62, 87, 0.502); /*373e57*/
 
 	border: 1px solid #0d052c;
 }
@@ -108,11 +110,16 @@ iframe {
 }
 
 #card .desc p strong {
-	color: #3d3a8d;
+	color: #4691f6; /*color: #3d3a8d;*/
 }
 
-#card:hover p {
-	color: #93c5f1;
+#card:hover p,
+#card:hover h3 {
+	color: #eeeee2;
+}
+
+#card h3 {
+	color: #84defc !important;
 }
 
 /*Skills*/
@@ -291,16 +298,21 @@ footer {
 }
 
 .highlightCurrent {
-	color: #ffac00;
+	color: #4691f6;
 }
 
-/*Toast*/
+/*Toast 111313 2F3231*/
 #toast {
+	background-color: #121314;
 	position: fixed;
 	right: 0px;
 	bottom: 0px;
+	border: 0.1rem solid rgb(37, 37, 48); /*#2b0f91*/
 }
 
+.toast-header {
+	background-color: #2f3231;
+}
 /*Forcing specifity on buttons*/
 .btn-check:focus + .btn-dark,
 .btn-dark:focus {
@@ -321,7 +333,7 @@ footer {
 	display: none;
 }
 
-.boton {
+.svgButton {
 	background-color: unset;
 	border: unset;
 }
