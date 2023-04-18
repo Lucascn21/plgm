@@ -1,153 +1,172 @@
 /*jshint esversion: 6 */
 //Bootstrap Modal
-let popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+let popoverTriggerList = [].slice.call(
+  document.querySelectorAll('[data-bs-toggle="popover"]')
+);
 let popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-	return new bootstrap.Popover(popoverTriggerEl);
+  return new bootstrap.Popover(popoverTriggerEl);
 });
 
 let clickedTech = [];
 
 //Focus on buttons
 function focusOn(button) {
-	//Get courses and projects on focus
-	let coursesAndProjects = [];
-	coursesAndProjects = Array.prototype.concat.apply(coursesAndProjects, document.getElementsByClassName("course"));
-	coursesAndProjects = Array.prototype.concat.apply(coursesAndProjects, document.getElementsByClassName("project"));
+  //Get courses and projects on focus
+  let coursesAndProjects = [];
+  coursesAndProjects = Array.prototype.concat.apply(
+    coursesAndProjects,
+    document.getElementsByClassName("course")
+  );
+  coursesAndProjects = Array.prototype.concat.apply(
+    coursesAndProjects,
+    document.getElementsByClassName("project")
+  );
 
-	//Handling the highlighting on click and sizing the buttons
-	let className = button.getAttribute("class");
-	if (className.includes("btn-outline-warning")) {
-		button.className = "btn btn-dark btn-shadow px-3 my-2 ml-0 text-left mr-1 shadow-none";
-		clickedTech.splice(clickedTech.indexOf(button.innerText.toLowerCase()), 1);
-	} else {
-		button.className = "btn btn-dark btn-shadow px-3 my-2 ml-0 text-left mr-1 btn-lg btn-outline-warning ";
-		clickedTech.splice(0, 0, button.innerText.toLowerCase());
-	}
-	highlightRelated(coursesAndProjects, clickedTech);
+  //Handling the highlighting on click and sizing the buttons
+  let className = button.getAttribute("class");
+  if (className.includes("btn-outline-warning")) {
+    button.className =
+      "btn btn-dark btn-shadow px-3 my-2 ml-0 text-left mr-1 shadow-none";
+    clickedTech.splice(clickedTech.indexOf(button.innerText.toLowerCase()), 1);
+  } else {
+    button.className =
+      "btn btn-dark btn-shadow px-3 my-2 ml-0 text-left mr-1 btn-lg btn-outline-warning ";
+    clickedTech.splice(0, 0, button.innerText.toLowerCase());
+  }
+  highlightRelated(coursesAndProjects, clickedTech);
 }
 
 function highlightRelated(coursesAndProjects, clickedTech) {
-	Object.entries(coursesAndProjects).forEach((element) => {
-		const [key, value] = element;
+  Object.entries(coursesAndProjects).forEach((element) => {
+    const [key, value] = element;
 
-		let currTechStack = coursesAndProjects[key].attributes["data-tech"].textContent.toLowerCase().split(",");
+    let currTechStack = coursesAndProjects[key].attributes[
+      "data-tech"
+    ].textContent
+      .toLowerCase()
+      .split(",");
 
-		//highlighting/dehighlighting the courses and project that match/not match
-		const foundSome = currTechStack.some((r) => clickedTech.includes(r));
-		if (foundSome) {
-			coursesAndProjects[key].classList.add("btn-outline-warning");
-		} else {
-			coursesAndProjects[key].classList.remove("btn-outline-warning");
-			coursesAndProjects[key].classList.remove("btn-outline-success");
-		}
-		const foundEvery = currTechStack.every((r) => clickedTech.includes(r));
-		if (foundEvery) {
-			coursesAndProjects[key].classList.remove("btn-outline-warning");
-			coursesAndProjects[key].classList.add("btn-outline-success");
-		}
-		if (clickedTech == 0) {
-			coursesAndProjects[key].classList.remove("btn-outline-warning");
-			coursesAndProjects[key].classList.remove("btn-outline-success");
-		}
-	});
+    //highlighting/dehighlighting the courses and project that match/not match
+    const foundSome = currTechStack.some((r) => clickedTech.includes(r));
+    if (foundSome) {
+      coursesAndProjects[key].classList.add("btn-outline-warning");
+    } else {
+      coursesAndProjects[key].classList.remove("btn-outline-warning");
+      coursesAndProjects[key].classList.remove("btn-outline-success");
+    }
+    const foundEvery = currTechStack.every((r) => clickedTech.includes(r));
+    if (foundEvery) {
+      coursesAndProjects[key].classList.remove("btn-outline-warning");
+      coursesAndProjects[key].classList.add("btn-outline-success");
+    }
+    if (clickedTech == 0) {
+      coursesAndProjects[key].classList.remove("btn-outline-warning");
+      coursesAndProjects[key].classList.remove("btn-outline-success");
+    }
+  });
 }
 
 //Function that receives the data from the button and appends the icons and paragraph
 function addIcons(courseButton) {
-	//DOM elements
-	let iconsElement = document.getElementById("icons");
-	let synopsisElement = document.getElementById("synopsis");
-	let titleElement = document.getElementById("offcanvasWithBothOptionsLabel");
+  //DOM elements
+  let iconsElement = document.getElementById("icons");
+  let synopsisElement = document.getElementById("synopsis");
+  let titleElement = document.getElementById("offcanvasWithBothOptionsLabel");
 
-	//If there is no synopsis fill with lorem
-	if (!courseButton.attributes["data-synopsis"].textContent) {
-		courseButton.attributes["data-synopsis"].textContent +=
-			"What is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry's standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book it has?";
-	}
-	//Data
-	let synopsis = courseButton.attributes["data-synopsis"].textContent.split(",");
-	let tech = courseButton.attributes["data-tech"].textContent.split(",");
+  //If there is no synopsis fill with lorem
+  if (!courseButton.attributes["data-synopsis"].textContent) {
+    courseButton.attributes["data-synopsis"].textContent +=
+      "What is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry's standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book it has?";
+  }
+  //Data
+  let synopsis =
+    courseButton.attributes["data-synopsis"].textContent.split(",");
+  let tech = courseButton.attributes["data-tech"].textContent.split(",");
 
-	//HTML elements get their content
-	iconsElement.innerHTML = generateIcons(tech);
-	synopsisElement.innerHTML = synopsis;
-	titleElement.innerHTML = courseButton.innerText;
+  //HTML elements get their content
+  iconsElement.innerHTML = generateIcons(tech);
+  synopsisElement.innerHTML = synopsis;
+  titleElement.innerHTML = courseButton.innerText;
 }
 
 //Function that returns the icon's html
 function generateIcons(tech) {
-	let techStack = "";
-	//Case-specific hack, i would have to implement some big architectural changes to my site in order to avoid this, i will definetly do a better architecture next time.
-	if (tech[0] === "C C++ C#") tech = ["C", "Cplusplus", "Csharp"];
-	Object.entries(tech).forEach((tech) => {
-		const [key, value] = tech;
+  let techStack = "";
+  //Case-specific hack, i would have to implement some big architectural changes to my site in order to avoid this, i will definetly do a better architecture next time.
+  if (tech[0] === "C C++ C#") tech = ["C", "Cplusplus", "Csharp"];
+  Object.entries(tech).forEach((tech) => {
+    const [key, value] = tech;
 
-		techStack += `<img class="img-fluid"  onerror="this.onerror=null;this.src='img/iconos/placeholder.png';" src="img/iconos/${value.toLowerCase()}.png" title="${value}">`;
-	});
-	return techStack;
+    techStack += `<img class="img-fluid"  onerror="this.onerror=null;this.src='img/iconos/placeholder.png';" src="img/iconos/${value.toLowerCase()}.png" title="${value}">`;
+  });
+  return techStack;
 }
 
 //AutoTyping in the Landing area
 let landingAsideText = document.getElementById("landingAsideText");
 let typewriter = new Typewriter(landingAsideText, {
-	loop: true,
+  loop: true,
 });
 
 typewriter
-	.typeString("Systems Analyst Student")
-	.pauseFor(3500)
-	.deleteAll()
-	.typeString("Selftaught Developer")
-	.pauseFor(3500)
-	.deleteChars(9)
-	.typeString("C1 English User")
-	.pauseFor(3500)
-	.start();
+  .typeString("Systems Analyst Student")
+  .pauseFor(3500)
+  .deleteAll()
+  .typeString("Selftaught Developer")
+  .pauseFor(3500)
+  .deleteChars(9)
+  .typeString("C1 English User")
+  .pauseFor(3500)
+  .start();
 
 //Whats my age again? function
 let landingAgeText = document.getElementById("landingAgeText");
 function calculate_age(dob) {
-	let diff_ms = Date.now() - dob.getTime();
-	let age_dt = new Date(diff_ms);
+  let diff_ms = Date.now() - dob.getTime();
+  let age_dt = new Date(diff_ms);
 
-	return Math.abs(age_dt.getUTCFullYear() - 1971);
+  return Math.abs(age_dt.getUTCFullYear() - 1971);
 }
 landingAgeText.textContent = calculate_age(new Date(1992, 2, 8));
 
 //Highlight / Dehighlight stuff
 function highlightTechs(selectedTech) {
-	//Highlight the tech related to the course or project
-	let totalTech = [];
-	let courseTech = selectedTech.attributes["data-tech"].textContent.toLowerCase().split(",");
-	document
-		.getElementById("tech")
-		.querySelectorAll(".btn")
-		.forEach(function (Button) {
-			Button.classList.remove("btn-outline-success");
-			if (courseTech.indexOf(Button.textContent.toLowerCase()) != -1) {
-				Button.classList.add("highlightGreen");
-				selectedTech.classList.add("btn-lg");
-			}
-			totalTech.push(Button.textContent.toLowerCase());
-		});
+  //Highlight the tech related to the course or project
+  let totalTech = [];
+  let courseTech = selectedTech.attributes["data-tech"].textContent
+    .toLowerCase()
+    .split(",");
+  document
+    .getElementById("tech")
+    .querySelectorAll(".btn")
+    .forEach(function (Button) {
+      Button.classList.remove("btn-outline-success");
+      if (courseTech.indexOf(Button.textContent.toLowerCase()) != -1) {
+        Button.classList.add("highlightGreen");
+        selectedTech.classList.add("btn-lg");
+      }
+      totalTech.push(Button.textContent.toLowerCase());
+    });
 }
 
 function deHighlightTechs(selectedTech) {
-	document
-		.getElementById("courses&projects")
-		.querySelectorAll(".btn")
-		.forEach(function (CoursesProjectsButton) {
-			if (CoursesProjectsButton.textContent == CoursesProjectsButton.textContent) {
-				CoursesProjectsButton.classList.remove("highlightGreen");
-				selectedTech.classList.remove("highlightGreen", "btn-lg");
-			}
-		});
-	document
-		.getElementById("tech")
-		.querySelectorAll(".btn")
-		.forEach(function (techButton) {
-			techButton.classList.remove("highlightGreen");
-		});
+  document
+    .getElementById("courses&projects")
+    .querySelectorAll(".btn")
+    .forEach(function (CoursesProjectsButton) {
+      if (
+        CoursesProjectsButton.textContent == CoursesProjectsButton.textContent
+      ) {
+        CoursesProjectsButton.classList.remove("highlightGreen");
+        selectedTech.classList.remove("highlightGreen", "btn-lg");
+      }
+    });
+  document
+    .getElementById("tech")
+    .querySelectorAll(".btn")
+    .forEach(function (techButton) {
+      techButton.classList.remove("highlightGreen");
+    });
 }
 
 //About's accordions toggle + -
@@ -160,12 +179,12 @@ let svgIconMinus = `<svg id="svgMinus"class="svg-icon" viewBox="0 0 20 20">
 </svg>`;
 
 function toggleIcon(section) {
-	//Change the icon according to the state of the acorddion
-	if (section.className == "collapsed") {
-		section.childNodes[1].outerHTML = svgIconPlus;
-	} else {
-		section.childNodes[1].outerHTML = svgIconMinus;
-	}
+  //Change the icon according to the state of the acorddion
+  if (section.className == "collapsed") {
+    section.childNodes[1].outerHTML = svgIconPlus;
+  } else {
+    section.childNodes[1].outerHTML = svgIconMinus;
+  }
 }
 
 //Toast toggle minimize/maximize and hide
@@ -173,14 +192,14 @@ let svgIconMinimize = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height
 let svgIconMaximize = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="bevel"><path d="M18 15l-6-6-6 6"/></svg>`;
 
 const hideToastBody = (toastButton) => {
-	if (document.getElementById("toastText").classList[1] == "hidden") {
-		toastButton.innerHTML = svgIconMinimize;
-	} else {
-		toastButton.innerHTML = svgIconMaximize;
-	}
-	document.getElementById("toastText").classList.toggle("hidden");
+  if (document.getElementById("toastText").classList[1] == "hidden") {
+    toastButton.innerHTML = svgIconMinimize;
+  } else {
+    toastButton.innerHTML = svgIconMaximize;
+  }
+  document.getElementById("toastText").classList.toggle("hidden");
 };
 
 const hideToast = () => {
-	document.getElementById("toast").classList.add("hidden");
+  document.getElementById("toast").classList.add("hidden");
 };
