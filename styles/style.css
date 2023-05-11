@@ -27,7 +27,7 @@ a:hover {
 /*Background*/
 .bg {
   z-index: -1;
-  background-image: url("./img/fondos/16245680689844.png");
+  background-image: url("../img/fondos/16245680689844.png");
   background-position: right bottom, left top;
   background-repeat: no-repeat, repeat;
 }
